@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio_Raafi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="img/Vavicon.png"> 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0c0c0c 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-mode {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 25%, #e0e7ff 50%, #c3cfe2 75%, #f5f7fa 100%);
+            color: #333333;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333333;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        body.light-mode .nav-links a {
+            color: #333333;
+        }
+
+        .nav-links a:hover {
+            color: #4ecdc4;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .theme-toggle {
+            color: #333333;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            padding: 2rem;
+        }
+
+        body.light-mode .hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 50%, #ffffff 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23333" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            width: 100%;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            padding: 1rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+            display: inline-block;
+            min-height: 1.2em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 90vw;
+        }
+
+        .hero-title::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #cccccc;
+        }
+
+        body.light-mode .hero-subtitle {
+            color: #555555;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: #aaaaaa;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        body.light-mode .hero-description {
+            color: #666666;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #4ecdc4;
+            border: 2px solid #4ecdc4;
+        }
+
+        body.light-mode .btn-secondary {
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #4ecdc4;
+        }
+
+        body.light-mode .profile-image img {
+            border: 3px solid #ff6b6b;
+        }
+
+        .about-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #cccccc;
+        }
+
+        body.light-mode .about-text {
+            color: #555555;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        body.light-mode .skill-card {
+            background: linear-gradient(135deg, #ffffff, #f5f7fa);
+            border: 1px solid #ccc;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(78, 205, 196, 0.2);
+            border-color: #4ecdc4;
+        }
+
+        body.light-mode .skill-card:hover {
+            border-color: #ff6b6b;
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skill-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-description {
+            color: #aaaaaa;
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .skill-description {
+            color: #666666;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        body.light-mode .project-card {
+            background: linear-gradient(135deg, #ffffff, #f5f7fa);
+            border: 1px solid #ccc;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(78, 205, 196, 0.2);
+            border-color: #4ecdc4;
+        }
+
+        body.light-mode .project-card:hover {
+            border-color: #ff6b6b;
+        }
+
+        .project-image {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #4ecdc4;
+        }
+
+        body.light-mode .project-title {
+            color: #ff6b6b;
+        }
+
+        .project-description {
+            color: #aaaaaa;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .project-description {
+            color: #666666;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        body.light-mode .tech-tag {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+
+        /* Education Section */
+        .education-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #ff6b6b, #4ecdc4);
+        }
+
+        .education-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        body.light-mode .education-item {
+            background: linear-gradient(135deg, #ffffff, #f5f7fa);
+            border: 1px solid #ccc;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+
+        body.light-mode .education-item::before {
+            border: 2px solid #fff;
+        }
+
+        .education-year {
+            color: #4ecdc4;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .education-year {
+            color: #ff6b6b;
+        }
+
+        .education-school {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            height: 200px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.light-mode .gallery-item::before {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+
+        body.light-mode .contact-info {
+            background: linear-gradient(135deg, #ffffff, #f5f7fa);
+            border: 1px solid #ccc;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .contact-item {
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .contact-item:hover {
+            background: rgba(78, 205, 196, 0.2);
+            transform: translateX(10px);
+        }
+
+        body.light-mode .contact-item:hover {
+            background: rgba(255, 107, 107, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            color: #4ecdc4;
+            margin-right: 0.8rem;
+            width: 25px;
+        }
+
+        body.light-mode .contact-icon {
+            color: #ff6b6b;
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+
+        body.light-mode .contact-form {
+            background: linear-gradient(135deg, #ffffff, #f5f7fa);
+            border: 1px solid #ccc;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4ecdc4;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .form-group label {
+            color: #ff6b6b;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: white;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .form-group input,
+        body.light-mode .form-group textarea {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333333;
+            border: 1px solid #ccc;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+        }
+
+        body.light-mode .form-group input:focus,
+        body.light-mode .form-group textarea:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #000000;
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid #333;
+        }
+
+        body.light-mode .footer {
+            background: #ffffff;
+            border-top: 1px solid #ccc;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+                padding: 2rem 1rem;
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+                max-width: 95vw;
+                line-height: 1.2;
+                margin-bottom: 1.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+                max-width: 90%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.8rem;
+                width: 80%;
+                max-width: 200px;
+            }
+
+            .social-links {
+                gap: 0.6rem;
+            }
+
+            .social-link {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .profile-image {
+                width: 180px;
+                height: 180px;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                padding: 1rem;
+            }
+
+            body.light-mode .nav-links {
+                background: rgba(255, 255, 255, 0.95);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .gallery-item {
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.5rem;
+                max-width: 90vw;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-description {
+                font-size: 0.8rem;
+            }
+
+            .btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.7rem;
+                width: 90%;
+            }
+
+            .social-link {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .skill-card, .project-card, .education-item, .contact-info, .contact-form {
+                padding: 1rem;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        body.light-mode .mobile-menu {
+            color: #333333;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+        }
+
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #4ecdc4;
+            animation: particle-float 6s infinite linear;
+        }
+
+        body.light-mode .particle {
+            background: #ff6b6b;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                transform: translateY(90vh) scale(1);
+            }
+            90% {
+                transform: translateY(10vh) scale(1);
+            }
+            100% {
+                transform: translateY(0vh) scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">MRN</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <button class="theme-toggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title" id="heroTitle">MUHAMAD RAAFI NAUFAL</h1>
+            <h2 class="hero-subtitle">Desain UI & Microsoft Office</h2>
+            <p class="hero-description">
+                Hai, saya Muhamad Raafi Naufal, lulusan SMK Teknik Komputer dan Jaringan. Saya mampu menggunakan Microsoft Excel, Word, desain grafis, dan membangun website dengan Bootstrap. Dengan kreativitas dan semangat, saya siap wujudkan ide menjadi solusi inovatif dengan ditambah bantuan AI!
+            </p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="javascript:void(0)" class="btn btn-secondary" onclick="downloadCV()">
+                    <i class="fas fa-download"></i> Download CV
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/muhamad-raafi-naufal-16896b347?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link" title="LinkedIn" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.instagram.com/raafi_doel/profilecard/?igsh=MTJpaHJvZmg1eGNueQ==" class="social-link" title="Instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@nyodul?_t=ZS-8xmUZxY8Tgo&_r=1" class="social-link" title="TikTok" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://youtube.com/@doelpholoboz?si=ORr1WOJHrE9jQfNl" class="social-link" title="YouTube" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://discord.gg/9KJ8hCz9" class="social-link" title="fa-discord" target="_blank">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://github.com/Radoel" class="social-link" title="GitHub" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title fade-in">Tentang Saya</h2>
+        <div class="about-content slide-in-left">
+            <div class="profile-image">
+                <img src="img/Profil.jpg" alt="Muhamad Raafi Naufal">
+            </div>
+            <div class="about-text">
+                <p>
+                    Saya Muhamad Raafi Naufal, lulusan SMK jurusan Teknik Komputer dan Jaringan (TKJ), yang menjadikan teknologi dan kreativitas sebagai kanvas untuk mewujudkan ide-ide besar. Dengan keahlian mendalam di Microsoft Excel, Microsoft Word, desain grafis, dan kecerdasan buatan (AI), saya merangkai solusi yang tidak hanya fungsional, tetapi juga menyentuh jiwa melalui keindahan estetika.
+                </p>
+                <p>
+                    Berlokasi di Bekasi, Jawa Barat, saya telah mengembangkan kemampuan dalam bidang desain grafis 
+                    dan pengolahan data. Saya selalu antusias untuk mengeksplorasi teknologi baru dan meningkatkan keterampilan 
+                    dalam dunia digital yang terus berkembang.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <h2 class="section-title fade-in">My Skills</h2>
+        <div class="skills-grid fade-in">
+            <div class="skill-card slide-in-left">
+                <div class="skill-icon">
+                    <i class="fas fa-file-excel"></i>
+                </div>
+                <h3 class="skill-name">Microsoft Excel</h3>
+                <p class="skill-description">Mengolah data di Microsoft Excel dengan keahlian dalam VLOOKUP, Pivot Table, dan visualisasi data. Saya merancang solusi analitis yang presisi, mengubah data mentah menjadi wawasan strategis yang jelas dan berdampak.</p>
+            </div>
+            <div class="skill-card slide-in-right">
+                <div class="skill-icon">
+                    <i class="fas fa-file-word"></i>
+                </div>
+                <h3 class="skill-name">Microsoft Word</h3>
+                <p class="skill-description">Menciptakan dokumen profesional menggunakan Microsoft Word. Dengan keahlian dalam tata letak yang rapi dan terstruktur, saya mengubah ide menjadi karya tertulis yang jelas, estetis, dan berdampak.</p>
+            </div>
+            <div class="skill-card slide-in-left">
+                <div class="skill-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3 class="skill-name">Design</h3>
+                <p class="skill-description">Desain grafis yang menuangkan ide menjadi karya visual yang memikat. Dengan sentuhan kreativitas dan keahlian, saya menciptakan desain yang indah, bermakna, dan membawa cerita hidup.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-title fade-in">My superior Projects</h2>
+        <div class="projects-grid fade-in">
+            <div class="project-card slide-in-right">
+                <div class="project-image">
+                    <img src="img/Ecomerce.png" alt="E-Commerce Website">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Photo Boot Sederhana Website</h3>
+                    <p class="project-description">
+                        Proyek sekolah membuat website untuk e-comerce statis menggunakan html css dan js dengan sederhana menggunakan bantuan AI. 
+                        Website ini memiliki fitur yang dimudahkan untuk membuat foto dengan berbagai efek dan filter.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">AI Assisted</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <h2 class="section-title fade-in">Pendidikan</h2>
+        <div class="education-timeline fade-in">
+            <div class="education-item slide-in-left">
+                <div class="education-year">2022 - 2025</div>
+                <h3 class="education-school">SMK Industri Nasional 1</h3>
+                <p> SMK INDUSTRI NASIONAL 1 menjadi pilihan strategis untuk mempersiapkan diri memasuki dunia kerja. Dengan fokus pada jurusan Teknik Komputer & Jaringan , saya memperoleh keterampilan praktis dan teori yang relevan dengan kebutuhan industri. Program magang dan praktik kerja lapangan memberikan pengalaman nyata yang menjadi modal utama dalam berkarir.</p>
+            </div>
+            <div class="education-item slide-in-right">
+                <div class="education-year">2019 - 2022</div>
+                <h3 class="education-school">MTS Nurul Azhar</h3>
+                <p>Melanjutkan ke jenjang MTs Nurul Azhar, saya mulai mengembangkan minat dan bakat di berbagai bidang. Tiga tahun yang penuh tantangan ini menjadi periode penting dalam pembentukan pemikiran kritis dan kemampuan bersosialisasi. Berbagai kegiatan ekstrakurikuler dan prestasi akademis yang diraih menjadi bekal berharga untuk melangkah ke jenjang selanjutnya.</p>
+            </div>
+            <div class="education-item slide-in-left">
+                <div class="education-year">2013 - 2019</div>
+                <h3 class="education-school">MI Nurul Azhar</h3>
+                <p>Masa kecil saya dihabiskan di MI Nurul Azhar, tempat di mana fondasi ilmu pengetahuan dan nilai-nilai keagamaan pertama kali tertanam dalam diri saya. Di sinilah perjalanan akademis saya dimulai, dengan belajar membaca, menulis, dan memahami dasar-dasar agama Islam. Lingkungan yang penuh kasih sayang dari para guru membentuk karakter dan kepribadian saya hingga saat ini.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <h2 class="section-title fade-in">My Project</h2>
+        <div class="gallery-grid fade-in">
+            <div class="gallery-item slide-in-right">
+                <img src="img/Photo Both.png" alt="Photo Both">
+            </div>
+            <div class="gallery-item slide-in-left">
+                <img src="img/Finance.png" alt="Laporan Keuangan Pribadi">
+            </div>
+            <div class="gallery-item slide-in-right">
+                <img src="img/absen.png" alt="Absen">
+            </div>
+            <div class="gallery-item slide-in-left">
+                <img src="img/Kumpulan Gambar.png" alt="Photo gathring">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title fade-in">Contact Me</h2>
+        <div class="contact-content slide-in-right">
+            <div class="contact-info">
+                <h3 style="margin-bottom: 1.5rem; color: #4ecdc4;">Get In Touch</h3>
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <div>
+                        <strong>Email</strong><br>
+                        raafinaufal23@gmail.com
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone contact-icon"></i>
+                    <div>
+                        <strong>Phone</strong><br>
+                        +62 882-1255-3218
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    <div>
+                        <strong>Location</strong><br>
+                        Bekasi, Jawa Barat, Indonesia
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3 style="margin-bottom: 1.5rem; color: #4ecdc4;">Send Message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nama</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Kirim Pesan 
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Muhamad Raafi Naufal. Thank you ye .</p>
+        <p>I Love You Indonesia❤️</p>
+    </footer>
+
+    <script>
+      // Download CV function (didefinisikan di luar biar pasti ke-load)
+        function downloadCV() {
+            const pdfSrc = 'docs/Muhamad Raafi Naufal.pdf'; // Path ke file PDF
+            const fileName = 'MUHAMAD RAAFI NAUFAL.pdf'; // Nama file saat diunduh
+
+            fetch(pdfSrc)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`File not found: ${pdfSrc}`);
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                    alert('CV Muhamad Raafi Naufal berhasil didownload! 🎉');
+                })
+                .catch(error => {
+                    console.error('Error downloading file:', error);
+                    alert(`Ups, gagal download CV. Pastikan file "${pdfSrc}" ada di folder img/ dan situs dijalankan via server (http://127.0.0.1:5500). Buka F12 > Console untuk detail error.`);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inisialisasi EmailJS
+            emailjs.init('WbbSmWdKC864Kr_Wm'); // Ganti dengan Public Key dari EmailJS
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Navbar background change on scroll
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.background = document.body.classList.contains('light-mode') 
+                        ? 'rgba(255, 255, 255, 0.98)' 
+                        : 'rgba(0, 0, 0, 0.98)';
+                } else {
+                    navbar.style.background = document.body.classList.contains('light-mode') 
+                        ? 'rgba(255, 255, 255, 0.95)' 
+                        : 'rgba(0, 0, 0, 0.95)';
+                }
+            });
+
+            // Theme toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                themeToggle.innerHTML = document.body.classList.contains('light-mode') 
+                    ? '<i class="fas fa-sun"></i>' 
+                    : '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+            });
+
+            // Load theme from localStorage
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Force hero-content animation on load
+            window.addEventListener('load', () => {
+                const heroContent = document.querySelector('.hero-content');
+                heroContent.style.animation = 'fadeInUp 1s ease forwards';
+                heroContent.style.opacity = '1';
+            });
+
+            // Particles animation
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 50;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 6 + 's';
+                    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            // Contact form handling with EmailJS
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const name = formData.get('name').trim();
+                const email = formData.get('email').trim();
+                const subject = formData.get('subject').trim();
+                const message = formData.get('message').trim();
+                
+                // Validasi input
+                if (!name || !email || !subject || !message) {
+                    alert('Harap isi semua kolom, bro!');
+                    return;
+                }
+
+                // Validasi format email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Masukkan email yang valid, ya!');
+                    return;
+                }
+
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                // Animasi loading
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sedang Kirim, Tunggu Sebentar...';
+                submitBtn.disabled = true;
+
+                // Kirim email menggunakan EmailJS
+                emailjs.send('service_57rdbme', 'template_k0qnvdu', {
+                    from_name: name,
+                    from_email: email,
+                    subject: subject,
+                    message: message
+                })
+                .then(function(response) {
+                    alert('Yeay! Pesan kamu berhasil terkirim! Mohon tunggu balasan dari Raafi , ya! 😘');
+                    document.getElementById('contactForm').reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, function(error) {
+                    console.error('Error:', error);
+                    alert('Ups, ada masalah saat mengirim pesan. Coba lagi nanti, ya!');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+            });
+
+            // Gallery item click effect
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1.05)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                        }, 150);
+                    }, 150);
+                });
+            });
+
+            // Mobile menu toggle
+            document.querySelector('.mobile-menu').addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.toggle('active');
+            });
+
+            // Simplified typing effect for hero title
+            function typeWriter(element, texts, speed = 100, pause = 2000) {
+                let textIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+
+                function type() {
+                    const currentText = texts[textIndex];
+                    element.style.opacity = '1';
+                    element.style.display = 'inline-block';
+                    element.innerHTML = currentText.substring(0, charIndex) + '<span class="cursor">|</span>';
+
+                    if (!isDeleting) {
+                        charIndex++;
+                        if (charIndex > currentText.length) {
+                            isDeleting = true;
+                            setTimeout(type, pause);
+                        } else {
+                            setTimeout(type, speed);
+                        }
+                    } else {
+                        charIndex--;
+                        if (charIndex < 0) {
+                            isDeleting = false;
+                            textIndex = (textIndex + 1) % texts.length;
+                            setTimeout(type, speed);
+                        } else {
+                            setTimeout(type, speed / 2);
+                        }
+                    }
+                }
+
+                element.style.opacity = '1';
+                type();
+            }
+
+            // Skills progress animation
+            function animateSkillBars() {
+                const skillCards = document.querySelectorAll('.skill-card');
+                skillCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.opacity = '1';
+                    }, index * 200);
+                });
+            }
+
+            // Initialize everything when page loads
+            window.addEventListener('load', function() {
+                createParticles();
+                
+                const skillCards = document.querySelectorAll('.skill-card');
+                skillCards.forEach(card => {
+                    card.style.transform = 'translateY(50px)';
+                    card.style.opacity = '0';
+                    card.style.transition = 'all 0.6s ease';
+                });
+                
+                setTimeout(animateSkillBars, 1000);
+
+                // Initialize typing effect
+                const heroTitle = document.getElementById('heroTitle');
+                const texts = [
+                    'MUHAMAD RAAFI NAUFAL',
+                    'DESAIGN GRAFIS',
+                    'MICROSOFT WORD',
+                    'MICROSOFT EXCEL',
+                    'FIGMA DESIGN',
+                    'AI ASSISTED DESIGN',
+                    'Panggil Aja Mas! Doel',
+                ];
+                heroTitle.style.opacity = '1';
+                typeWriter(heroTitle, texts, 100, 2000);
+            });
+
+            // Add hover effects to buttons
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add click ripple effect
+            function createRipple(event) {
+                const button = event.currentTarget;
+                const ripple = document.createElement('span');
+                const rect = button.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = event.clientX - rect.left - size / 2;
+                const y = event.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                button.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', createRipple);
+            });
+
+            const rippleStyle = document.createElement('style');
+            rippleStyle.textContent = `
+                .btn {
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .ripple {
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.3);
+                    transform: scale(0);
+                    animation: ripple-animation 0.6s linear;
+                    pointer-events: none;
+                }
+                
+                @keyframes ripple-animation {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(rippleStyle);
+
+            // Update current year in footer
+            const currentYear = new Date().getFullYear();
+            document.querySelector('.footer p').innerHTML = 
+                `© ${currentYear} Muhamad Raafi Naufal. Thank You Ye😘.`;
+
+            // Add scroll progress indicator
+            const scrollProgress = document.createElement('div');
+            scrollProgress.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 3px;
+                background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+                z-index: 9999;
+                transition: width 0.1s ease;
+            `;
+            document.body.appendChild(scrollProgress);
+
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                scrollProgress.style.width = scrollPercent + '%';
+            });
+        });
+    </script>
+</body>
+</html>
